@@ -1,0 +1,8 @@
+!Texture
+Id: 4900edce-f43a-4eb7-99b3-348886b851bb
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/caust_001.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
+    PremultiplyAlpha: false

@@ -1,0 +1,122 @@
+﻿namespace SimplerWater.Water.Effects
+{
+    shader MaterialWaterSurfaceEmissiveShading 
+        : IMaterialSurfacePixel, MaterialPixelShadingStream, DepthBase, OpaqueBase, ShaderBase, PositionStream4, Transformation, Global
+    {
+        rgroup PerMaterial
+        {
+			stage Texture2D CausticsTexture;
+        }
+
+        cbuffer PerMaterial
+        {
+            stage float CausticsSpeed = 0.1f;
+            stage float CausticsScale = 8;
+            stage float CausticsStrength = 1;
+            stage float CausticsSplit = 0.0015f;
+
+            stage float FogDensity = 0.1f;
+            [Color] stage float3 FogColor = float3(0, 0, 0);
+
+            stage float RefractionStrength = 25; 
+            [Color] stage float3 TintColor = float3(0.6f, 0.63f, 0.79f);
+
+            stage float FresenlOffset = 0.05f;
+            stage float FresnelStrength = 0.55f;
+            stage float FresnelPower = 14;
+        }
+        
+        float2 Panner(float2 uv, float speed, float tiling)
+        {
+            return (float2(1, 0) * Global.Time * speed) + (uv * tiling);
+        }
+
+        float3 GetCaustics(float2 uv, float offset)
+        {
+            float2 uv1 = uv + float2(offset, offset);
+            float2 uv2 = uv + float2(offset, -offset);
+            float2 uv3 = uv + float2(-offset, -offset);
+
+            float r = CausticsTexture.Sample(LinearRepeatSampler, uv1).x;
+            float g = CausticsTexture.Sample(LinearRepeatSampler, uv2).x;
+            float b = CausticsTexture.Sample(LinearRepeatSampler, uv3).x;
+
+            return float3(r, g, b);
+        }
+
+        override void Compute()
+        {
+            float2 screenPos = streams.ShadingPosition.xy;
+		    float2 screenSpaceUv = streams.ShadingPosition.xy / ViewSize.xy;
+
+            float2 uvOffset = streams.matNormal.xy * RefractionStrength;
+            uvOffset.y *= ViewSize.y / ViewSize.x;
+
+            float2 screenSpaceUvOffset = (streams.ShadingPosition.xy + uvOffset) / ViewSize.xy;
+
+            // Compute view space depth
+		    float depthPS = streams.ShadingPosition.z;
+            float depthVS = ComputeDepthFromZProj(depthPS);
+
+            float sceneDepthCS = GetZProjDepthFromUV(screenSpaceUvOffset);
+            float sceneDepthVS = ComputeDepthFromZProj(sceneDepthCS);
+
+            float depthDifference = sceneDepthVS - depthVS;
+
+            uvOffset *= saturate(depthDifference);
+
+            screenSpaceUvOffset = (streams.ShadingPosition.xy + uvOffset) / ViewSize.xy;
+
+            sceneDepthCS = GetZProjDepthFromUV(screenSpaceUvOffset);
+            sceneDepthVS = ComputeDepthFromZProj(sceneDepthCS);
+
+            depthDifference = sceneDepthVS - depthVS;
+
+            float3 refraction = GetOpaqueColor(screenSpaceUvOffset) * TintColor;
+
+            // Calculate fresnel factor
+            float3 viewVector = Eye.xyz - streams.PositionWS.xyz;
+            float3 viewDir = normalize(viewVector);
+
+            float fresnel = dot(streams.meshNormalWS, viewDir);
+            fresnel = saturate(1 - fresnel);
+            fresnel =  saturate(FresenlOffset + FresnelStrength * pow(fresnel, FresnelPower));
+
+            // Scene color at pixel
+            float3 sceneColor = GetOpaqueColor(screenSpaceUv);
+
+            // Caustics
+            // Compute world space position below water surface
+            float4 scenePositionClipSpace = float4((1.0f - screenSpaceUv.xy * 2.0f) * float2(-1.0f, 1.0f), sceneDepthCS, 1.0f);
+            
+            float4 scenePositionVS = mul(scenePositionClipSpace, ProjectionInverse);
+            scenePositionVS.xyzw /= scenePositionVS.w;
+
+            float3 scenePositionWS = mul(scenePositionVS, ViewInverse).xyz;
+
+            float2 causticsUV1 = scenePositionWS.xz;
+            float2 causticsUV2 = scenePositionWS.xz;
+
+            float3 caustics1 = GetCaustics(Panner(causticsUV1, CausticsSpeed * 0.75, 1.0 / CausticsScale), CausticsSplit);
+            float3 caustics2 = GetCaustics(Panner(causticsUV2, CausticsSpeed, -1.0 / CausticsScale), CausticsSplit);
+
+            float3 caustics = min(caustics1, caustics2) * CausticsStrength;
+
+            refraction = refraction + caustics;
+
+            // Add some depth fog 
+            float fogFactor = exp2(-FogDensity * depthDifference);
+            refraction = lerp(FogColor, refraction, fogFactor);
+
+            // Combine
+            float3 shadedSurface = streams.shadingColor.xyz; // Surface output from lighting calculations
+
+            float3 surface = lerp(refraction, shadedSurface, fresnel);
+
+            float alpha = saturate(sceneDepthVS - depthVS);
+            float3 result = lerp(sceneColor, surface, smoothstep(0, 1, alpha));
+
+            streams.shadingColor = float4(result, 1);
+        }
+    };
+}

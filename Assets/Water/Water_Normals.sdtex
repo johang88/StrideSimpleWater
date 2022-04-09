@@ -1,0 +1,7 @@
+!Texture
+Id: f9977f83-4e91-4403-b00b-7ce8b3eae4db
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Water_Normals.jpg
+Type: !NormalMapTextureType {}
+IsStreamable: false

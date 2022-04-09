@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWater.Windows", "SimpleWater.Windows\SimpleWater.Windows.csproj", "{18C288C9-CBE6-4EA5-9FE1-D21B10020027}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWater.Game", "SimpleWater.Game\SimpleWater.Game.csproj", "{DA7982CF-53A3-42F1-BCF4-275ED743F458}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18C288C9-CBE6-4EA5-9FE1-D21B10020027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C288C9-CBE6-4EA5-9FE1-D21B10020027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C288C9-CBE6-4EA5-9FE1-D21B10020027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C288C9-CBE6-4EA5-9FE1-D21B10020027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7982CF-53A3-42F1-BCF4-275ED743F458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7982CF-53A3-42F1-BCF4-275ED743F458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7982CF-53A3-42F1-BCF4-275ED743F458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7982CF-53A3-42F1-BCF4-275ED743F458}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C3CA201-27B6-47EA-B8CA-C3A2C97F50D2}
+	EndGlobalSection
+EndGlobal

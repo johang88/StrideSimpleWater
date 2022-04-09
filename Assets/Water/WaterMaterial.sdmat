@@ -1,0 +1,58 @@
+!MaterialAsset
+Id: a322c374-787b-4042-a61d-51b46aa83529
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Attributes:
+    Surface: !MaterialNormalMapFeature
+        NormalMap: !ComputeShaderClassColor
+            MixinReference: WaterNormalMap
+            Generics: {}
+            CompositionNodes:
+                2175335186933c978b2c2fef1326b524~Texture: !ComputeTextureColor
+                    Texture: f9977f83-4e91-4403-b00b-7ce8b3eae4db:Water/Water_Normals
+                    FallbackValue:
+                        Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
+                    Filtering: Anisotropic
+                    Scale: {X: 1.0, Y: 1.0}
+                    Offset: {X: 0.0, Y: 0.0}
+                    Swizzle: null
+                605e3e009194d6ecad8f60f0a4a5745e~Speed: !ComputeFloat4
+                    Value: {X: 0.02, Y: 0.02, Z: 0.0, W: 0.0}
+        ScaleAndBias: false
+    MicroSurface: !MaterialGlossinessMapFeature
+        GlossinessMap: !ComputeFloat
+            Value: 0.95
+    Diffuse: !MaterialDiffuseMapFeature
+        DiffuseMap: !ComputeColor
+            Value: {R: 0.5893359, G: 0.60025537, B: 0.66875, A: 1.0}
+    DiffuseModel: !MaterialDiffuseLambertModelFeature {}
+    Specular: !MaterialMetalnessMapFeature
+        MetalnessMap: !ComputeFloat
+            Value: 0.0
+    SpecularModel: !MaterialSpecularMicrofacetModelFeature
+        Fresnel: !MaterialSpecularMicrofacetFresnelSchlick {}
+        Visibility: !MaterialSpecularMicrofacetVisibilitySmithSchlickGGX {}
+        NormalDistribution: !MaterialSpecularMicrofacetNormalDistributionGGX {}
+        Environment: !MaterialSpecularMicrofacetEnvironmentGGXLUT {}
+    Emissive: !MaterialWaterEmissiveMapFeature
+        Caustics: 4900edce-f43a-4eb7-99b3-348886b851bb:Water/caust_001
+        CausticsSpeed: 0.1
+        CausticsScale: 8.0
+        CausticsStrength: 1.0
+        CausticsSplit: 0.0015
+        FogDensity: 0.1
+        FogColor: {R: 0.0, G: 0.0, B: 0.0}
+        RefractionStrength: 25.0
+        TintColor: {R: 0.6, G: 0.63, B: 0.79}
+        FresenlOffset: 0.05
+        FresnelStrength: 0.55
+        FresnelPower: 14.0
+    Transparency: !MaterialTransparencyBlendFeature
+        Alpha: !ComputeFloat
+            Value: 1.0
+        Tint: !ComputeColor
+            Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
+        DitheredShadows: false
+    Overrides:
+        UVScale: {X: 1.0, Y: 1.0}
+Layers: {}

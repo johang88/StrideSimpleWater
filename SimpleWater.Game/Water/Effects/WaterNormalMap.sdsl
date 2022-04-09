@@ -1,0 +1,35 @@
+﻿namespace SimplerWater.Water.Effects
+{
+    shader WaterNormalMap : ComputeColor, Texturing
+    {
+        compose ComputeColor Texture;
+	    compose ComputeColor Speed;
+
+        float3 DecodeNormal(float3 normal)
+        {
+            // Assume that we have to scale and reconstruct z the normal maps
+            normal = (2.0f * normal) - 1.0f;
+            normal.z = sqrt(max(0, 1.0f - (normal.x * normal.x + normal.y * normal.y)));
+
+            return normal;
+        }
+
+        override float4 Compute()
+        {
+            // Sample twice and combine
+            float speed = Speed.Compute().xy;
+
+            float2 uv = streams.TexCoord.xy;
+
+		    streams.TexCoord.xy = uv + speed * Global.Time;
+            float3 normal1 = DecodeNormal(Texture.Compute().xyz);
+
+            streams.TexCoord.xy = uv - speed * Global.Time * 0.5;
+            float3 normal2 = DecodeNormal(Texture.Compute().xyz);
+
+            float3 normal = NormalUtil.BlendRNM(normal1, normal2);
+
+		    return float4(normal, 1);
+        }
+    };
+}
