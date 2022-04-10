@@ -208,15 +208,34 @@ SharedRenderers:
     ee80a20a9bd99f2d70711114e15fe7ca: !Stride.Rendering.Compositing.DebugRenderer,Stride.Rendering
         Id: 2f51782e-e23a-46fc-b1a4-6385a207d263
         DebugRenderStages: {}
-Game: !Stride.Rendering.Compositing.SceneCameraRenderer,Stride.Engine
-    Id: 76fe87cf-f574-4ad6-85b8-e9a9586be0e2
-    Camera: ref!! 9aeac611-d1f6-46da-a235-e20cc154e170
-    Child: !Stride.Rendering.Compositing.SceneRendererCollection,Stride.Rendering
-        Id: 82568e46-92e7-421a-8dca-114a74e0cd69
-        Children:
-            d39c5ddbf8b7d5ca02bafb6496b1cc3c: !Stride.Rendering.Compositing.ForwardRenderer,Stride.Engine ref!! 4d409a59-d3c6-4b55-a5c7-4bd9b8886ea5
-            01d338078e9b21121ead0868932613dd: !Stride.Rendering.Compositing.DebugRenderer,Stride.Rendering ref!! 2f51782e-e23a-46fc-b1a4-6385a207d263
-    RenderMask: All
+Game*: !Stride.Rendering.Compositing.SceneRendererCollection,Stride.Rendering
+    Id: 3d2bf9fd-a46a-4dc6-8960-164d8b70e801
+    Children:
+        98ed1dcb210e75411af4b30a46ea0708: !Stride.Rendering.Compositing.SceneCameraRenderer,Stride.Engine
+            Id: 53461842-728a-48a0-96ea-48610f0f16d6
+            Camera: ref!! 9aeac611-d1f6-46da-a235-e20cc154e170
+            Child: !Stride.Rendering.Compositing.RenderTextureSceneRenderer,Stride.Rendering
+                Id: 73447645-fb23-4a9d-b56f-e9f7c9b174f4
+                RenderTexture: fbdba181-703d-48c8-8243-ad87dcfac4ce:Water/RipplesRenderTarget
+                Child: !Stride.Rendering.Compositing.SceneRendererCollection,Stride.Rendering
+                    Id: c4ddf376-d800-4011-8f2e-5c8daf3edd91
+                    Children:
+                        24dd5c575c60703b01a5f8a205107ffa: !Stride.Rendering.Compositing.ClearRenderer,Stride.Rendering
+                            Id: 5ac79104-da65-4c58-87cb-9e025cb8ff5a
+                            Color: {R: 0.0, G: 0.0, B: 0.0, A: 1.0}
+                        31d6bbea2502b2592a6160013f9c5ff9: !Stride.Rendering.Compositing.SingleStageRenderer,Stride.Rendering
+                            Id: 97f3b331-fdb0-47db-86dc-731991f95f66
+                            RenderStage: ref!! 0fa30591-02ee-486d-9347-2b6aee83d035
+            RenderMask: Group20
+        1b758ceb83f379139913e4e4715a9491: !Stride.Rendering.Compositing.SceneCameraRenderer,Stride.Engine
+            Id: 62b428e6-bffc-48a1-8b42-e47ab0295496
+            Camera: ref!! 9aeac611-d1f6-46da-a235-e20cc154e170
+            Child: !Stride.Rendering.Compositing.SceneRendererCollection,Stride.Rendering
+                Id: 04c7da3f-134e-4cad-8e67-ced020cf8122
+                Children:
+                    b1758a7fbb61658510ddb5e02c4c2279: !Stride.Rendering.Compositing.ForwardRenderer,Stride.Engine ref!! 4d409a59-d3c6-4b55-a5c7-4bd9b8886ea5
+                    f676bfcee157f74cc03a5d73563e60ee: !Stride.Rendering.Compositing.DebugRenderer,Stride.Rendering ref!! 2f51782e-e23a-46fc-b1a4-6385a207d263
+            RenderMask: Group0, Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9, Group10, Group11, Group12, Group13, Group14, Group15, Group16, Group17, Group18, Group19, Group21, Group22, Group23, Group24, Group25, Group26, Group27, Group28, Group29, Group30, Group31
 SingleView: !Stride.Rendering.Compositing.ForwardRenderer,Stride.Engine ref!! 04d863bd-4bbd-4dca-9a49-29e21171975a
 Editor: !Stride.Rendering.Compositing.ForwardRenderer,Stride.Engine ref!! 4d409a59-d3c6-4b55-a5c7-4bd9b8886ea5
 BlockPositions: {}

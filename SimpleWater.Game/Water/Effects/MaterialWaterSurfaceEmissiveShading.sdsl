@@ -6,6 +6,7 @@
         rgroup PerMaterial
         {
 			stage Texture2D CausticsTexture;
+            stage Texture2D RipplesTexture;
         }
 
         cbuffer PerMaterial
@@ -44,12 +45,35 @@
             return float3(r, g, b);
         }
 
+        float4 SampleNormalFromRipples(float2 uv)
+        {
+            const float2 offset = float2(1.0 / 1024.0, 1.0 / 1024.0);
+
+            float t = RipplesTexture.SampleLevel(PointSampler, float2(uv.x, uv.y + offset.y), 0.0).x;
+            float b = RipplesTexture.SampleLevel(PointSampler, float2(uv.x, uv.y - offset.y), 0.0).x;
+            float l = RipplesTexture.SampleLevel(PointSampler, float2(uv.x + offset.x, uv.y), 0.0).x;
+            float r = RipplesTexture.SampleLevel(PointSampler, float2(uv.x - offset.x, uv.y), 0.0).x;
+
+            float3 tanZ = float3(0, t - b, 1);
+            float3 tanX = float3(1, r - l, 0);
+
+            float3 n = cross(tanZ, tanX);
+            n = normalize(n);
+            
+            n.y = 1.0 - n.y;
+
+            return float4(n, t);
+        }
+
         override void Compute()
         {
             float2 screenPos = streams.ShadingPosition.xy;
 		    float2 screenSpaceUv = streams.ShadingPosition.xy / ViewSize.xy;
 
-            float2 uvOffset = streams.matNormal.xy * RefractionStrength;
+            // Ripples
+            float4 ripplesNormal = SampleNormalFromRipples(screenSpaceUv);
+
+            float2 uvOffset = streams.matNormal.xy * RefractionStrength + ripplesNormal.xy * 500;
             uvOffset.y *= ViewSize.y / ViewSize.x;
 
             float2 screenSpaceUvOffset = (streams.ShadingPosition.xy + uvOffset) / ViewSize.xy;
@@ -115,6 +139,8 @@
 
             float alpha = saturate(sceneDepthVS - depthVS);
             float3 result = lerp(sceneColor, surface, smoothstep(0, 1, alpha));
+
+            result += ripplesNormal.w * 0.25;
 
             streams.shadingColor = float4(result, 1);
         }

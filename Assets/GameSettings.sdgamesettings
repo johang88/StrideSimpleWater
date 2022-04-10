@@ -6,8 +6,8 @@ DefaultScene: 51380167-18b6-4bfa-a496-863f2d3d334e:MainScene
 GraphicsCompositor: 24938d65-0903-4e5e-874d-ac35b6556b66:GraphicsCompositor
 Defaults:
     - !Stride.Graphics.RenderingSettings,Stride.Graphics
-        DefaultBackBufferWidth: 1920
-        DefaultBackBufferHeight: 1080
+        DefaultBackBufferWidth: 1280
+        DefaultBackBufferHeight: 720
         AdaptBackBufferToScreen: false
         DefaultGraphicsProfile: Level_10_0
         ColorSpace: Linear

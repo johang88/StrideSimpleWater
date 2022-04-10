@@ -37,6 +37,8 @@ namespace SimpleWater.Water
         [DataMember(51), Display(name: "Strength", category: "Fresnel")] public float FresnelStrength { get; set; } = 0.55f;
         [DataMember(52), Display(name: "Power", category: "Fresnel")] public float FresnelPower { get; set; } = 14;
 
+        [DataMember(60), Display(name: "Render Target", category: "Ripples")] public Texture RipplesRenderTarget { get; set; }
+
         public override void GenerateShader(MaterialGeneratorContext context)
         {
             context.MaterialPass.Parameters.Set(MaterialWaterSurfaceEmissiveShadingKeys.CausticsTexture, Caustics);
@@ -55,6 +57,8 @@ namespace SimpleWater.Water
             context.MaterialPass.Parameters.Set(MaterialWaterSurfaceEmissiveShadingKeys.FresenlOffset, FresenlOffset);
             context.MaterialPass.Parameters.Set(MaterialWaterSurfaceEmissiveShadingKeys.FresnelStrength, FresnelStrength);
             context.MaterialPass.Parameters.Set(MaterialWaterSurfaceEmissiveShadingKeys.FresnelPower, FresnelPower);
+
+            context.MaterialPass.Parameters.Set(MaterialWaterSurfaceEmissiveShadingKeys.RipplesTexture, RipplesRenderTarget);
 
             var shaderBuilder = context.AddShading(this);
             shaderBuilder.ShaderSources.Add(new ShaderClassSource("MaterialWaterSurfaceEmissiveShading"));

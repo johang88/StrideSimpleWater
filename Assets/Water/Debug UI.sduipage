@@ -1,0 +1,48 @@
+!UIPageAsset
+Id: 20727c16-a653-4fbb-b014-7adc39f0f858
+SerializedVersion: {Stride: 2.1.0.1}
+Tags: []
+Design:
+    Resolution: {X: 1280.0, Y: 720.0, Z: 1000.0}
+Hierarchy:
+    RootParts:
+        - !Grid ref!! 5e8eecd8-d1bf-477a-aac1-b77e3f15941c
+    Parts:
+        -   UIElement: !Grid
+                Id: 5e8eecd8-d1bf-477a-aac1-b77e3f15941c
+                DependencyProperties: {}
+                BackgroundColor: {R: 0, G: 0, B: 0, A: 0}
+                Margin: {}
+                Children:
+                    dd7ee6744a3907879787b6050e3e6eda: !Canvas ref!! 65f304b5-adca-43a5-ae72-c193597fc249
+                RowDefinitions: {}
+                ColumnDefinitions: {}
+                LayerDefinitions: {}
+        -   UIElement: !Canvas
+                Id: 65f304b5-adca-43a5-ae72-c193597fc249
+                DependencyProperties: {}
+                BackgroundColor: {R: 0, G: 0, B: 0, A: 0}
+                Width: 256.0
+                Height: 256.0
+                HorizontalAlignment: Left
+                VerticalAlignment: Bottom
+                Margin: {Left: 20.0, Bottom: 20.0}
+                MaximumWidth: 3.4028235E+38
+                MaximumHeight: 3.4028235E+38
+                MaximumDepth: 3.4028235E+38
+                Children:
+                    a781302e32f35ee4ca761ca5ddcc9289: !ImageElement ref!! 8a801555-b2d0-42ee-a29f-977704ea18e3
+        -   UIElement: !ImageElement
+                Id: 8a801555-b2d0-42ee-a29f-977704ea18e3
+                DependencyProperties: {}
+                BackgroundColor: {R: 0, G: 0, B: 0, A: 0}
+                Width: 256.0
+                Height: 256.0
+                Margin: {}
+                MaximumWidth: 3.4028235E+38
+                MaximumHeight: 3.4028235E+38
+                MaximumDepth: 3.4028235E+38
+                Source: !SpriteFromTexture
+                    Texture: fbdba181-703d-48c8-8243-ad87dcfac4ce:Water/RipplesRenderTarget
+                    Center: {X: 0.0, Y: 0.0}
+                Color: {R: 255, G: 255, B: 255, A: 255}

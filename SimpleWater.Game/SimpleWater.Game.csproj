@@ -1,35 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
-    <RootNamespace>SimpleWater</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Stride.Core" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Stride.Core.Assets.CompilerApp" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
-    <PackageReference Include="Stride.Engine" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Stride.Particles" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Stride.Physics" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Stride.UI" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Water\Effects\MaterialWaterSurfaceEmissiveShading.sdsl.cs">
-      <DesignTime>True</DesignTime>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Water\Effects\WaterNormalMap.sdsl.cs">
-      <DesignTime>True</DesignTime>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Water\Effects\MaterialWaterSurfaceEmissiveShading.sdsl">
-      <LastGenOutput>MaterialWaterSurfaceEmissiveShading.sdsl.cs</LastGenOutput>
-    </None>
-    <None Update="Water\Effects\WaterNormalMap.sdsl">
-      <LastGenOutput>WaterNormalMap.sdsl.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0-windows</TargetFrameworks>
+		<RootNamespace>SimpleWater</RootNamespace>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Stride.Core" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
+		<PackageReference Include="Stride.Core.Assets.CompilerApp" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
+		<PackageReference Include="Stride.Engine" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
+		<PackageReference Include="Stride.Particles" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
+		<PackageReference Include="Stride.Physics" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
+		<PackageReference Include="Stride.UI" Version="4.1.0.1" PrivateAssets="contentfiles;analyzers" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Water\Effects\MaterialWaterSurfaceEmissiveShading.sdsl.cs">
+			<DesignTime>True</DesignTime>
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Water\Effects\WaterNormalMap.sdsl.cs">
+			<DesignTime>True</DesignTime>
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Water\Effects\MaterialWaterSurfaceEmissiveShading.sdsl">
+			<LastGenOutput>MaterialWaterSurfaceEmissiveShading.sdsl.cs</LastGenOutput>
+		</None>
+		<None Update="Water\Effects\WaterNormalMap.sdsl">
+			<LastGenOutput>WaterNormalMap.sdsl.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
 </Project>

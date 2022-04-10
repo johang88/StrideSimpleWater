@@ -19,6 +19,7 @@ namespace SimplerWater.Water.Effects
     public static partial class MaterialWaterSurfaceEmissiveShadingKeys
     {
         public static readonly ObjectParameterKey<Texture> CausticsTexture = ParameterKeys.NewObject<Texture>();
+        public static readonly ObjectParameterKey<Texture> RipplesTexture = ParameterKeys.NewObject<Texture>();
         public static readonly ValueParameterKey<float> CausticsSpeed = ParameterKeys.NewValue<float>(0.1f);
         public static readonly ValueParameterKey<float> CausticsScale = ParameterKeys.NewValue<float>(8);
         public static readonly ValueParameterKey<float> CausticsStrength = ParameterKeys.NewValue<float>(1);

@@ -1,0 +1,10 @@
+!Texture
+Id: 684fe687-ed14-498f-aa1c-4057176cf25a
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../../StrideRPG/StrideRPG/Resources/Ripple.png
+IsCompressed: false
+Type: !ColorTextureType
+    UseSRgbSampling: false
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
+IsStreamable: false

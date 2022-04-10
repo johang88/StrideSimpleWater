@@ -33,7 +33,7 @@ Set to 0
 
 ### Emissive
 
-Set to `Water Emissive Map`. Most of the water shading is calculated in this custom feature. Set the caustics texture to something, the rest of the options should have sane default.
+Set to `Water Emissive Map`. Most of the water shading is calculated in this custom feature. Set the caustics texture to something, the rest of the options should have sane default. Set the ripples texutre to the ripples render target.
 
 ### Transparency
 
@@ -42,3 +42,7 @@ Set to blend with alpha = 1, this is just to force rendering of the material to 
 ## Mesh
 
 Use a plane with whatever UV scale works for your scene. 
+
+## Interactive Ripples
+
+Ripples requires a particle system that renders into a specific render group. A render target should be setup, and the compositor has to be modified to render to this texture. The particle system render group should be excluded from the main view in the compositor.
